@@ -190,7 +190,13 @@ const analyzeProfile = async (req, res) => {
     if (err.response?.status === 403) {
       return res.status(429).json({ success: false, message: 'GitHub API rate limit exceeded. Add a GITHUB_TOKEN in .env to increase the limit.' });
     }
-    console.error('analyzeProfile error:', err.message);
+    console.error("========== FULL ERROR ==========");
+    console.error(err);
+    console.error("Message:", err.message);
+    console.error("Code:", err.code);
+    console.error("SQL Message:", err.sqlMessage);
+    console.error("Response:", err.response?.data);
+    console.error("================================");
     return res.status(500).json({ success: false, message: 'Internal server error', error: err.message });
   }
 };
